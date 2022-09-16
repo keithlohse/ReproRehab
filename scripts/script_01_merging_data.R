@@ -106,8 +106,8 @@ MASTER$subID <- factor(map_chr(str_split(MASTER$file_id, "_"), 1))
 MASTER$condition <- factor(map_chr(str_split(MASTER$file_id, "_"), 2))
 
 map_chr(str_split(MASTER$file_id, "_"), 2)
-str_sub(map_chr(str_split(MASTER$file_id, "_"), 1), 1,2)
-MASTER$condition <- factor(str_sub(map_chr(str_split(MASTER$file_id, "_"), 1), 1,2))
+str_sub(map_chr(str_split(MASTER$file_id, "_"), 2), 1,2)
+MASTER$condition <- factor(str_sub(map_chr(str_split(MASTER$file_id, "_"), 2), 1,2))
 head(MASTER)
 
 MASTER <- MASTER %>% relocate(file_id, subID, condition)

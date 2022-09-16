@@ -9,6 +9,158 @@ list.files("./data/")
 DATA <- read.csv("./data/data_PROCESSED_EEG.csv",
                     header=TRUE, 
                     stringsAsFactors = TRUE)
+head(DATA)
+
+# Aggregating the data across all participants:
+?dplyr::group_by
+DATA %>% select(-X) %>%
+  group_by(Hz) %>%
+  summarise(frontal_mean=mean(frontal, na.rm = TRUE))
+
+
+?summarise_at
+DAT_GRAND_AVE <- DATA %>% select(-X) %>%
+  group_by(Hz) %>%
+  summarise_at(vars(frontal:ln_occipital), mean, na.rm = TRUE)
+
+head(DAT_GRAND_AVE)
+
+
+ggplot(data=DAT_GRAND_AVE, aes(x=Hz, y=frontal)) +
+  geom_line(col="black") +
+  geom_point(shape=16, col="black") +
+  scale_x_continuous(name = "Frequency (Hz)") +
+  scale_y_continuous(name = "Power (uV^2)") +
+  ggtitle("Frontal Power")+
+  theme_bw()+
+  theme(axis.text=element_text(size=10, color="black"), 
+        legend.text=element_text(size=12, color="black"),
+        legend.title=element_text(size=12, face="bold"),
+        axis.title=element_text(size=12, face="bold"),
+        plot.title=element_text(size=12, face="bold", hjust=0.5),
+        panel.grid.minor = element_blank(),
+        strip.text = element_text(size=12, face="bold"),
+        legend.position = "bottom")
+
+
+ggplot(data=DAT_GRAND_AVE, aes(x=ln_Hz, y=ln_frontal)) +
+  geom_line(col="black") +
+  geom_point(shape=16, col="black") +
+  scale_x_continuous(name = "Frequency (Hz)") +
+  scale_y_continuous(name = "Power (uV^2)") +
+  ggtitle("Frontal Power")+
+  theme_bw()+
+  theme(axis.text=element_text(size=10, color="black"), 
+        legend.text=element_text(size=12, color="black"),
+        legend.title=element_text(size=12, face="bold"),
+        axis.title=element_text(size=12, face="bold"),
+        plot.title=element_text(size=12, face="bold", hjust=0.5),
+        panel.grid.minor = element_blank(),
+        strip.text = element_text(size=12, face="bold"),
+        legend.position = "bottom")
+
+
+# Plotting all of the regions by transforming the data from long to wide
+head(DAT_GRAND_AVE)
+DAT_GRAND_AVE_LONG <- DAT_GRAND_AVE %>% select(Hz:occipital) %>%
+  pivot_longer(cols=frontal:occipital, names_to = "region", values_to = "power")
+
+head(DAT_GRAND_AVE_LONG)
+
+DAT_GRAND_AVE_LOG <- DAT_GRAND_AVE %>% select(ln_Hz:ln_occipital) %>%
+  pivot_longer(cols=ln_frontal:ln_occipital, names_to = "region", values_to = "ln_power")
+head(DAT_GRAND_AVE_LONG)
+
+
+ggplot(data=DAT_GRAND_AVE_LONG, aes(x=Hz, y=power)) +
+  geom_line(aes(col=region)) +
+  geom_point(aes(col=region), shape=16) +
+  scale_x_continuous(name = "Frequency (Hz)") +
+  scale_y_continuous(name = "Power (uV^2)") +
+  theme_bw()+
+    labs(color="Region")+
+  theme(axis.text=element_text(size=10, color="black"), 
+        legend.text=element_text(size=12, color="black"),
+        legend.title=element_text(size=12, face="bold"),
+        axis.title=element_text(size=12, face="bold"),
+        plot.title=element_text(size=12, face="bold", hjust=0.5),
+        panel.grid.minor = element_blank(),
+        strip.text = element_text(size=12, face="bold"),
+        legend.position = "bottom")
+
+
+ggplot(data=DAT_GRAND_AVE_LOG, aes(x=ln_Hz, y=ln_power)) +
+  geom_line(aes(col=region)) +
+  geom_point(aes(col=region), shape=16) +
+  scale_x_continuous(name = "Frequency log(Hz)") +
+  scale_y_continuous(name = "Power log(uV^2)") +
+  theme_bw()+
+  labs(color="Region")+
+  theme(axis.text=element_text(size=10, color="black"), 
+        legend.text=element_text(size=12, color="black"),
+        legend.title=element_text(size=12, face="bold"),
+        axis.title=element_text(size=12, face="bold"),
+        plot.title=element_text(size=12, face="bold", hjust=0.5),
+        panel.grid.minor = element_blank(),
+        strip.text = element_text(size=12, face="bold"),
+        legend.position = "bottom")
 
 
 
+# Averages within each condition 
+head(DATA)
+DAT_COND_AVE <- DATA %>% group_by(condition, Hz) %>%
+  summarise_at(vars(frontal:ln_occipital), mean, na.rm = TRUE)
+
+head(DAT_COND_AVE)
+
+DAT_COND_LONG <- DAT_COND_AVE %>% select(condition:occipital) %>%
+  pivot_longer(cols=frontal:occipital, names_to = "region", values_to = "power")
+
+head(DAT_COND_LONG)
+
+DAT_COND_LONG_LOG <- DAT_COND_AVE %>% select(condition, ln_Hz:ln_occipital) %>%
+  pivot_longer(cols=ln_frontal:ln_occipital, names_to = "region", values_to = "ln_power")
+
+head(DAT_COND_LONG_LOG)
+
+
+ggplot(data=DAT_COND_LONG, aes(x=Hz, y=power)) +
+  geom_line(aes(col=region)) +
+  geom_point(aes(col=region), shape=16) +
+  facet_wrap(~condition)+
+  scale_x_continuous(name = "Frequency (Hz)") +
+  scale_y_continuous(name = "Power (uV^2)") +
+  theme_bw()+
+  labs(color="Region")+
+  theme(axis.text=element_text(size=10, color="black"), 
+        legend.text=element_text(size=12, color="black"),
+        legend.title=element_text(size=12, face="bold"),
+        axis.title=element_text(size=12, face="bold"),
+        plot.title=element_text(size=12, face="bold", hjust=0.5),
+        panel.grid.minor = element_blank(),
+        strip.text = element_text(size=12, face="bold"),
+        legend.position = "bottom")
+
+
+ggplot(data=DAT_COND_LONG_LOG, aes(x=ln_Hz, y=ln_power)) +
+  geom_line(aes(col=region)) +
+  geom_point(aes(col=region), shape=16) +
+  facet_wrap(~condition)+
+  scale_x_continuous(name = "Frequency log(Hz)") +
+  scale_y_continuous(name = "Power log(uV^2)") +
+  theme_bw()+
+  labs(color="Region")+
+  theme(axis.text=element_text(size=10, color="black"), 
+        legend.text=element_text(size=12, color="black"),
+        legend.title=element_text(size=12, face="bold"),
+        axis.title=element_text(size=12, face="bold"),
+        plot.title=element_text(size=12, face="bold", hjust=0.5),
+        panel.grid.minor = element_blank(),
+        strip.text = element_text(size=12, face="bold"),
+        legend.position = "bottom")
+
+
+
+
+# Spaghetti Plots showing individual participant data:
