@@ -163,4 +163,23 @@ ggplot(data=DAT_COND_LONG_LOG, aes(x=ln_Hz, y=ln_power)) +
 
 
 
-# Spaghetti Plots showing individual participant data:
+# Spaghetti Plots layering individual participant data with aggregate data:
+head(DATA)
+
+head(DAT_COND_AVE)
+ggplot(data=DAT_COND_LONG_LOG, aes(x=ln_Hz, y=ln_power)) +
+  geom_line(aes(col=region)) +
+  geom_point(aes(col=region), shape=16) +
+  facet_wrap(~condition)+
+  scale_x_continuous(name = "Frequency log(Hz)") +
+  scale_y_continuous(name = "Power log(uV^2)") +
+  theme_bw()+
+  labs(color="Region")+
+  theme(axis.text=element_text(size=10, color="black"), 
+        legend.text=element_text(size=12, color="black"),
+        legend.title=element_text(size=12, face="bold"),
+        axis.title=element_text(size=12, face="bold"),
+        plot.title=element_text(size=12, face="bold", hjust=0.5),
+        panel.grid.minor = element_blank(),
+        strip.text = element_text(size=12, face="bold"),
+        legend.position = "bottom")
