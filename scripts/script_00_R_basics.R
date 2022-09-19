@@ -19,6 +19,8 @@ x > 2
 
 z < 2
 z > 2
+# 2 gets coerced to a string, and then strings are compared in ASCII order
+# "." < 0 < 2 < ...9 < A < B < C <... W...
 
 is.character(z)
 is.numeric(z)
