@@ -18,7 +18,8 @@ x < 2
 x > 2
 
 z < 2
-z < 2
+z > 2
+
 is.character(z)
 is.numeric(z)
 
