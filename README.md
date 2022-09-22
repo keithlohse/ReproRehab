@@ -9,8 +9,8 @@ Finally, I am using a project-based learning approach where I will spend as litt
 ## Introduction to R Video Modules
 * Downloading and Installing R and R Studio (https://www.youtube.com/watch?v=enLJZQJT51o)
 * Basics of R Programming: Functions, Arguments, and Object Classes (https://youtu.be/H5e5-TVJPvY)
-* Importing, Merging and Exporting Data ()
-* Wrangling Data ()
+* Importing, Merging and Exporting Data (https://youtu.be/1d53GFnbWaA)
+* Wrangling Data (https://youtu.be/3hj1wsxoGS4)
 * Tidy Data and Data Visualization ()
 * Basic Data Analysis and Reporting ()
 
