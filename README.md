@@ -1,4 +1,4 @@
-# ReproRehab
+# R Programming Resources for ReproRehab
 
 This repository contains code, data, and other materials for learners enrolled in the Reproducible Rehabilitaton (ReproRehab) research education program. Specifically, this repository contains information for learners looking to get started with R. If you copy the repository to your local machine, you should have all of the scripts and data necessary to follow along with the video tutorials below and get started learning R. Drs. Liew and Finley also have repositories set up for learning Matlab (#) and Python (#). 
 
