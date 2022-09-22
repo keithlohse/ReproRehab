@@ -6,7 +6,7 @@ This repository contains code, data, and other materials for learners enrolled i
 
 Finally, I am using a project-based learning approach where I will spend as little time on abstract R coding problems as possible, and more time learning the specific skills required to wrangle, tidy, visualize, and analyze rehab-relevant data. This is not everyone's preferred way to learn and it has the limitation of creating very specific knowledge (i.e., you won't learn everything htat is possible with R). If you like learning programming more abstractly, I encourage you to supplment (or replace!) these videos with other online courses that will address R more completely. However, I have a hard time staying motivated to learn unless there is a problem motivating why I am learning something. To that end, I have built these modules around learning to process and analyze EEG data in a cross-sectional study of younger and older adults (https://pubmed.ncbi.nlm.nih.gov/34999166/).  
 
-## Introduction to R Video Modules
+## Crash Course Introduction to R Video Modules
 * Downloading and Installing R and R Studio (https://www.youtube.com/watch?v=enLJZQJT51o)
 * Basics of R Programming: Functions, Arguments, and Object Classes (https://youtu.be/H5e5-TVJPvY)
 * Importing, Merging and Exporting Data (https://youtu.be/1d53GFnbWaA)
