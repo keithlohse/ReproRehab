@@ -11,7 +11,7 @@ Finally, I am using a project-based learning approach where I will spend as litt
 * Basics of R Programming: Functions, Arguments, and Object Classes (https://youtu.be/H5e5-TVJPvY)
 * Importing, Merging and Exporting Data (https://youtu.be/1d53GFnbWaA)
 * Wrangling Data (https://youtu.be/3hj1wsxoGS4)
-* Tidy Data and Data Visualization ()
+* Tidy Data and Data Visualization (https://youtu.be/Ot4yBDO_Yqs)
 * Basic Data Analysis and Reporting ()
 
 ## Data Analysis with R
