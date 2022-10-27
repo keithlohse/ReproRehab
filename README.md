@@ -12,7 +12,7 @@ Finally, I am using a project-based learning approach where I will spend as litt
 * Importing, Merging and Exporting Data (https://youtu.be/1d53GFnbWaA)
 * Wrangling Data (https://youtu.be/3hj1wsxoGS4)
 * Tidy Data and Data Visualization (https://youtu.be/Ot4yBDO_Yqs)
-* Basic Data Analysis and Reporting ()
+* Live Coding example Data Analysis (https://youtu.be/wz1dU6MBAz8)
 
 ## Data Analysis with R
 * How to do a one-sample t-test in R (https://www.youtube.com/watch?v=ZdgNOWY3cs4)
