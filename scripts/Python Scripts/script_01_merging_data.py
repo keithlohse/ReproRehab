@@ -4,18 +4,16 @@ import numpy as np
 from scipy import stats
 
 # 1.0. Importing, merging, and relabeling the data.
-os.chdir("~/GitHub/ReproRehab/")
+os.chdir("C:/Users/kelop/OneDrive/Documents/GitHub/ReproRehab/")
 os.listdir()
 
 os.listdir("./data")
 os.listdir("./data/EEG_sub_files/")
 
-os.chdir("~/GitHub/ReproRehab/data/EEG_sub_files/")
+os.chdir("./data/EEG_sub_files/")
 
 # Testing out importing data with 1 subject:
-test = pd.read_csv("./oa01_ec.csv",
-                   header=True,
-                   dtype="object")
+test = pd.read_csv("./oa01_ec.csv")
 
 test.head()
 
@@ -39,17 +37,20 @@ for file in file_names:
 
 
 # Reading in the individual subjects and merging into a master file
-if 1 >= 2:
+if 1 <= 2:
     print("Oh yeah!")
+
 # Evaluates to true, returns "Oh yeah!"
 
 file_names[0]
 if file_names[0] == "oa01_ec.csv":
     print("Oh yeah!")
+    
 # Evaluates to true, returns "Oh yeah!"
 
 if file_names[0] == "OA01_ec.csv":
     print("Oh yeah!")
+
 # Evaluates to false
 
 if file_names[0] == "OA01_ec.csv":
@@ -62,9 +63,7 @@ else:
 # Putting an if-else statement inside our for-loop
 for name in file_names:
     print(name)
-    subject = pd.read_csv(name,
-                          header=True,
-                          dtype="object")
+    subject = pd.read_csv(name)
 
     # if the MASTER data set doesn't exist, create it
     if "MASTER" not in globals():
@@ -107,5 +106,5 @@ MASTER.head()
 # Export the cleaned PSD data
 os.getcwd()
 
-os.chdir("~/GitHub/ReproRehab/data/")
+os.chdir("C:/Users/kelop/OneDrive/Documents/GitHub/ReproRehab/data/")
 MASTER.to_csv("MASTER_EO_and_EC_EEG.csv", index=False)
