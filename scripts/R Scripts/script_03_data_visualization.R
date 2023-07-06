@@ -13,7 +13,8 @@ head(DATA)
 
 # Aggregating the data across all participants:
 ?dplyr::group_by
-DATA %>% select(-X) %>%
+DATA %>% 
+  select(-X) %>%
   group_by(Hz) %>%
   summarise(frontal_mean=mean(frontal, na.rm = TRUE))
 
@@ -119,7 +120,7 @@ DAT_COND_LONG <- DAT_COND_AVE %>% select(condition:occipital) %>%
 
 head(DAT_COND_LONG)
 
-DAT_COND_LONG_LOG <- DAT_COND_AVE %>% select(condition, ln_Hz:ln_occipital) %>%
+DAT_COND_LONG_LOG <- DAT_COND_AVE %>% select(condition, Hz, ln_frontal:ln_occipital) %>%
   pivot_longer(cols=ln_frontal:ln_occipital, names_to = "region", values_to = "ln_power")
 
 head(DAT_COND_LONG_LOG)
@@ -143,11 +144,11 @@ ggplot(data=DAT_COND_LONG, aes(x=Hz, y=power)) +
         legend.position = "bottom")
 
 
-ggplot(data=DAT_COND_LONG_LOG, aes(x=ln_Hz, y=ln_power)) +
+ggplot(data=DAT_COND_LONG_LOG, aes(x=Hz, y=ln_power)) +
   geom_line(aes(col=region)) +
   geom_point(aes(col=region), shape=16) +
   facet_wrap(~condition)+
-  scale_x_continuous(name = "Frequency log(Hz)") +
+  scale_x_continuous(name = "Frequency (Hz)") +
   scale_y_continuous(name = "Power log(uV^2)") +
   theme_bw()+
   labs(color="Region")+
@@ -167,10 +168,10 @@ ggplot(data=DAT_COND_LONG_LOG, aes(x=ln_Hz, y=ln_power)) +
 head(DATA)
 head(DAT_COND_AVE)
 
-ggplot(data=DATA, aes(x=ln_Hz, y=ln_occipital)) +
+ggplot(data=DATA, aes(x=Hz, y=ln_occipital)) +
   geom_line(aes(group=subID, col=subID), alpha=0.5) +
   facet_wrap(~condition)+
-  geom_line(data=DAT_COND_AVE, aes(x=ln_Hz, y=ln_occipital), 
+  geom_line(data=DAT_COND_AVE, aes(x=Hz, y=ln_occipital), 
             col="black", lwd=1) +
   scale_x_continuous(name = "Frequency, ln(Hz)") +
   scale_y_continuous(name = "Power,  ln(uV^2)") +
@@ -198,12 +199,9 @@ head(DAT_OCCIP_WIDE)
 
 DAT_OCCIP_WIDE$diff_ln_power <- DAT_OCCIP_WIDE$ln_occipital_ec - DAT_OCCIP_WIDE$ln_occipital_eo
 
-
-ggplot(data=DAT_OCCIP_WIDE, aes(x=ln_Hz, y=diff_ln_power)) +
+ggplot(data=DAT_OCCIP_WIDE, aes(x=Hz, y=diff_ln_power)) +
   geom_line(aes(group=subID, col=subID), alpha=0.5) +
   facet_wrap(~group)+
-  geom_line(data=DAT_COND_AVE, aes(x=ln_Hz, y=ln_occipital), 
-             col="black", lwd=1) +
   scale_x_continuous(name = "Frequency (Hz)") +
   scale_y_continuous(name = "Power (uV^2)") +
   theme_bw()+
@@ -229,13 +227,13 @@ DAT_OCCIP_WIDE_GROUP_AVE <- DAT_OCCIP_WIDE %>% group_by(group, Hz) %>%
 head(DAT_OCCIP_WIDE_GROUP_AVE)
 
 
-ggplot(data=DAT_OCCIP_WIDE, aes(x=ln_Hz, y=diff_ln_power)) +
+ggplot(data=DAT_OCCIP_WIDE, aes(x=Hz, y=diff_ln_power)) +
   geom_line(aes(group=subID, col=subID), alpha=0.5) +
   facet_wrap(~group)+
   geom_line(data=DAT_OCCIP_WIDE_GROUP_AVE, 
-            aes(x=ln_Hz, y=diff_ln_power), 
+            aes(x=Hz, y=diff_ln_power), 
              col="black", lwd=1) +
-  scale_x_continuous(name = "Frequency, ln(Hz)") +
+  scale_x_continuous(name = "Frequency (Hz)") +
   scale_y_continuous(name = "Change in Log Power (EC-EO)") +
   theme_bw()+
   labs(color="Region")+
